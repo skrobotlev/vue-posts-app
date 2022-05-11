@@ -2,10 +2,10 @@
   <div v-show="posts.length > 0">
     <!-- ЧТОБЫ ЭЛЕМЕНТ H2 БЫЛ В ДОМ ДЕРЕВЕ ВСЕГДА И ПРОСТО СКРЫТ,V-SHOW; ИЛИ ПО УСЛОВИЮ IF ELSE ВСТРАИВАТЬСЯ В ДЕРЕВО -->
     <!-- <div v-if="posts.length > 0"> -->
-    <h3>Users list</h3>
+    <h3>Posts list</h3>
     <post-item
       :post="post"
-      :key="post.desc"
+      :key="post.body"
       v-for="post in posts"
       @remove="$emit('remove', post)"
     />

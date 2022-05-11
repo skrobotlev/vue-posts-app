@@ -13,7 +13,7 @@
     /> -->
     <!-- <my-input v-model="post.title" type="text" placeholder="Title" /> -->
     <my-input v-model="post.title" type="text" placeholder="Title" />
-    <my-input v-model="post.desc" type="text" placeholder="Desc" />
+    <my-input v-model="post.body" type="text" placeholder="body" />
     <my-button
       @click="createPost"
       style="align-self: flex-end; margin-top: 15px"
@@ -29,7 +29,7 @@ export default {
     return {
       post: {
         title: "",
-        desc: "",
+        body: "",
       },
     };
   },
@@ -39,7 +39,7 @@ export default {
       this.$emit("create", this.post);
       this.post = {
         title: "",
-        desc: "",
+        body: "",
       };
     },
   },
