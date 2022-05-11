@@ -1,10 +1,12 @@
 <template>
   <div class="app">
     <!-- v-bind:posts || :posts короткая запись -->
-    <PostForm />
-    <PostList :posts="posts" />
-
-    <!-- <div></div> -->
+    <h1>Posts page</h1>
+    <my-button @click="showDialog">Create post</my-button>
+    <my-dialog v-model:show="dialogVisible">
+      <PostForm @create="createPost" />
+    </my-dialog>
+    <PostList @remove="removePost" :posts="posts" />
   </div>
 </template>
 
@@ -17,25 +19,24 @@ export default {
     //   ДАННЫЕ ВНУТРИ ДАТА ТИПА posts НАЗЫВАЮТСЯ МОДЕЛИ, А ЭТО Я СЧИТАЮ АНАЛОГ ЛОКАЛЬНОГО СТЕЙТА
     return {
       posts: [
-        { id: 1, title: "JS spa", desc: `Opisanie posta ${this.id}` },
-        { id: 2, title: "JS spa", desc: "Opisanie posta" },
-        { id: 3, title: "JS spa", desc: "Opisanie posta" },
-        { id: 4, title: "JS spa", desc: "Opisanie posta" },
+        { id: 1, title: "JS spa", desc: `Opisanie posta 1` },
+        { id: 2, title: "JS spa", desc: "Opisanie posta 2" },
+        { id: 3, title: "JS spa", desc: "Opisanie posta 3" },
+        { id: 4, title: "JS spa", desc: "Opisanie posta 4" },
       ],
-      title: "",
-      desc: "",
+      dialogVisible: false,
     };
   },
   methods: {
-    createPost() {
-      const newPost = {
-        id: Date.now(),
-        desc: this.desc,
-        title: this.title,
-      };
-      this.posts.push(newPost);
-      this.title = "";
-      this.desc = "";
+    createPost(post) {
+      this.posts.push(post);
+      this.dialogVisible = false;
+    },
+    removePost(post) {
+      this.posts = this.posts.filter((p) => p.id !== post.id);
+    },
+    showDialog() {
+      this.dialogVisible = true;
     },
     // inputTitle(event) {
     //   console.log(event);

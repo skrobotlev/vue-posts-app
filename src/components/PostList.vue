@@ -1,12 +1,23 @@
 <template>
-  <div class="post" :key="post.id" v-for="post in posts">
-    <div><strong>Name:</strong>{{ post.title }}</div>
-    <div><strong>About:</strong>{{ post.desc }}</div>
+  <div v-show="posts.length > 0">
+    <!-- ЧТОБЫ ЭЛЕМЕНТ H2 БЫЛ В ДОМ ДЕРЕВЕ ВСЕГДА И ПРОСТО СКРЫТ,V-SHOW; ИЛИ ПО УСЛОВИЮ IF ELSE ВСТРАИВАТЬСЯ В ДЕРЕВО -->
+    <!-- <div v-if="posts.length > 0"> -->
+    <h3>Users list</h3>
+    <post-item
+      :post="post"
+      :key="post.desc"
+      v-for="post in posts"
+      @remove="$emit('remove', post)"
+    />
   </div>
+  <!-- <h2 v-else style="color: red">Empty list</h2> -->
+  <h2 v-show="posts.length === 0" style="color: red">Empty list</h2>
 </template>
 
 <script>
+import PostItem from "./PostItem.vue";
 export default {
+  components: { PostItem },
   props: {
     posts: {
       type: Array,
@@ -16,10 +27,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.post {
-  padding: 15px;
-  margin-top: 15px;
-  border: 2px solid teal;
-}
-</style>
+<style scoped></style>
